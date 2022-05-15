@@ -88,11 +88,13 @@ public class MainActivity extends AppCompatActivity {
                 String fireText = getEmoji(0X1F525) + " Fire Detected | Lat: " + jsonObject.getInt("latitude") + " Long: "  + jsonObject.getInt("longitude") +"\n" + getEmoji(0X1F551) + " " +  new SimpleDateFormat("MMM d, hh:mm aaa").format(new Date());
                     notificationFires.add(fireText);
                 }
-
+                createFireListView(notificationFires);
                 if (!jsonObject.getString("person").isEmpty()){
                     String humanText = getEmoji(0X1F64B) + " Human Detected | Lat: " + jsonObject.getInt("latitude") + " Long: "  + jsonObject.getInt("longitude") + "\n" + getEmoji(0X1F551) + " " + new SimpleDateFormat("MMM d, hh:mm aaa").format(new Date());
                     notificationHumans.add(humanText);
                 }
+                createHumanListView(notificationHumans);
+
 
 
                 if (notificationFires.size() == 4){
@@ -103,12 +105,14 @@ public class MainActivity extends AppCompatActivity {
                     notificationHumans.remove(0);
                 }
                 System.out.println("OnMessage: " + notificationFires.toString());
-                createFireListView(notificationFires);
-                createHumanListView(notificationHumans);
-                createNotification(text);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            finally {
+                createNotification(text);
+            }
+
 
         }
 
@@ -184,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         System.out.println("new notification");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "New Fire");
-        builder.setContentTitle("New Fire!");
+        builder.setContentTitle("New Fire Alert!");
         //builder.setContentText(new SimpleDateFormat("MMM d, hh:mm aaa").format(new Date()).toString());
         onTextChange(text);
         builder.setSmallIcon(R.mipmap.fire_vision_logo);
