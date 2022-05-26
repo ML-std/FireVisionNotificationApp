@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable okhttp3.Response response) {
             onTextChange("error: " + t.getMessage());
-            okhttp3.Request request = new okhttp3.Request.Builder().url("ws://54.209.157.254:8000/warning").build();
+            okhttp3.Request request = new okhttp3.Request.Builder().url("ws://18.233.98.58:8000/ws/warning/").build();
             EchoWebSocketListener listener = new EchoWebSocketListener();
             WebSocket ws =  client.newWebSocket(request,listener);
 
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
        // });
     }
     private void start(){
-        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://54.209.157.254:8000/warning").build();
+        okhttp3.Request request = new okhttp3.Request.Builder().url("ws://18.233.98.58:8000/ws/warning/").build();
         EchoWebSocketListener listener = new EchoWebSocketListener();
         WebSocket ws =  client.newWebSocket(request,listener);
     }
